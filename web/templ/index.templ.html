@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>lark2md</title>
+    <link
+      href="https://fonts.googleapis.com/css?family=Gloria+Hallelujah&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css?family=Material+Icons&display=block"
+      rel="stylesheet"
+    />
+    <script
+      type="module"
+      src="https://unpkg.com/@material/mwc-icon?module"
+    ></script>
+    <script
+      type="module"
+      src="https://unpkg.com/wired-elements?module"
+    ></script>
+    <style>
+      body {
+        margin: 0;
+        font-family: "Gloria Hallelujah", cursive;
+        /* font-size: 16px; */
+        line-height: 1.8;
+      }
+      main {
+        padding: 16px;
+        text-align: center;
+      }
+      wired-card {
+        max-width: 400px;
+        margin: 0 auto;
+        padding: 20px;
+        display: block;
+      }
+      wired-icon-button {
+        margin: 0 10px;
+      }
+      section {
+        max-width: 400px;
+        margin: 0 auto;
+        padding: 30px 0 0 0;
+      }
+      wired-button {
+        margin: 8px;
+      }
+      wired-input {
+        width: 260px;
+        font-family: inherit;
+      }
+      wired-spinner {
+        margin: 10px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <main>
+      <wired-card elevation="5">
+        <h1>lark2md service</h1>
+      </wired-card>
+      <section>
+        <p>
+          <wired-icon-button>
+            <mwc-icon>favorite</mwc-icon> </wired-icon-button
+          >GitHub:
+          <wired-link href="https://github.com/llmpros/lark2md" target="_blank"
+            >llmpros/lark2md</wired-link
+          >
+        </p>
+      </section>
+
+      <section>
+        <p>Input the feishu/lark document url below:</p>
+        <wired-input
+          placeholder="https://domain.feishu.cn/docx/doxcnXhmd9GIPTyqoLn3zVP7AFe"
+        ></wired-input>
+        <wired-button elevation="2">Download</wired-button>
+        <p id="hint" style="display: none;">
+          Please wait. It may take a while to response.
+        </p>
+      </section>
+    </main>
+  </body>
+
+  <script type="module">
+    const url = document.querySelector("wired-input");
+    const button = document.querySelector("wired-button");
+    const hint = document.querySelector("#hint");
+    button.addEventListener("click", () => {
+      const docUrl = encodeURIComponent(url.value.trim());
+      console.log(docUrl);
+      hint.setAttribute("style", "display: block");
+      window.location.href = `/download?url=${docUrl}`;
+    });
+  </script>
+</html>
